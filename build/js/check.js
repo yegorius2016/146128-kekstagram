@@ -11,19 +11,16 @@ function getMessage(a:*, b:*=):string {
     console.log('Переданное SVG-изображение содержит' + ' ' + a + ' ' + 'объектов и' + ' ' + (b * 4) + ' ' + 'атрибутов');
   }
   if (Array.isArray(a)) {
+    var sum = 0;
     for var i = 0; i < a.length; i++ {
-      var array = [];
-      var sum = 0;
       sum += array[i];
     }
     console.log('Количество красных точек во всех строчках изображения:' + ' ' + sum);
   }
   if ((Array.isArray(a) && Array.isArray(b)) {
+    var square = 0;
     for var i = 0; i < a.length; i++ {
-      var array = [];
-      array.push(a[i] * b[i]);
-      var square = 0;
-      square += array[i];
+      square += a[i] * b[i];
     }
   console.log('Общая площадь артефактов сжатия:' + ' ' + square + ' ' + 'пикселей');
   }
