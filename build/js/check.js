@@ -9,7 +9,7 @@ function getMessage(a:*, b:*=):string {
   if (typeof(a) === 'number') {
     alert ('Переданное SVG-изображение содержит' + a + 'объектов и' + (b * 4) + ' ' + 'атрибутов');
   }
-  if Array.isArray([a]) {
+  if ((a = [sum]) && (a instanceof Array) {
     alert ()
   }
   
