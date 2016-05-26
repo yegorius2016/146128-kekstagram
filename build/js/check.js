@@ -21,8 +21,9 @@ function getMessage(a:*, b:*=):string {
   if ((Array.isArray(a) && Array.isArray(b)) {
     for var i = 0; i < a.length; i++ {
       var array = [];
+      array.push(a[i] * b[i])
       var square = 0;
-      square = (a[i] * b[i]);
+      square += array[i] ;
     }
   return 'Общая площадь артефактов сжатия:' + ' ' + square + ' ' + 'пикселей';
   }
