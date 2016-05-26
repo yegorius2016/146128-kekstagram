@@ -1,3 +1,5 @@
+var a;
+var b;
 function getMessage(a:*, b:*=):string {
   if (typeof(a) === 'boolean') {
     if (a = true) {
