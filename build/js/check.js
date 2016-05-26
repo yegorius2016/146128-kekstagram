@@ -1,5 +1,4 @@
-function getMessage(a, b) {
-  
+function getMessage() {
   if (typeof a === 'boolean') {
     if (a == true) {
     return('Переданное GIF-изображение анимировано и содержит' + ' ' + b + ' ' + 'кадров');
