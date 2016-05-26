@@ -1,4 +1,4 @@
-var getMessage = function(a, b) {
+function getMessage(a, b) {
   if (typeof a === 'boolean') {
     if (a == true) {
     return('Переданное GIF-изображение анимировано и содержит' + ' ' + b + ' ' + 'кадров');
@@ -25,6 +25,6 @@ var getMessage = function(a, b) {
     return('Общая площадь артефактов сжатия:' + ' ' + square + ' ' + 'пикселей');
   }
 } 
-return getMessage(a:*, b:*=):string;
+getMessage(a:*, b:*=):string;
 
 
