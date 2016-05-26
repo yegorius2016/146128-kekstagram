@@ -5,7 +5,7 @@ function getMessage() {
     if (a == true) {
     return('Переданное GIF-изображение анимировано и содержит' + ' ' + b + ' ' + 'кадров');
     }
-    else {
+    else if (a == false) {
     return('Переданное GIF-изображение не анимировано');
     }
   }
