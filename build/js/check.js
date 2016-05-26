@@ -1,6 +1,6 @@
 function getMessage(a:*, b:*=):string {
   if (typeof a === 'boolean') {
-    if (a === true) {
+    if (a == true) {
     console.log('Переданное GIF-изображение анимировано и содержит' + ' ' + b + ' ' + 'кадров');
     }
     else {
@@ -21,9 +21,9 @@ function getMessage(a:*, b:*=):string {
   if ((Array.isArray(a) && Array.isArray(b)) {
     for var i = 0; i < a.length; i++ {
       var array = [];
-      array.push(a[i] * b[i])
+      array.push(a[i] * b[i]);
       var square = 0;
-      square += array[i] ;
+      square += array[i];
     }
   console.log('Общая площадь артефактов сжатия:' + ' ' + square + ' ' + 'пикселей');
   }
