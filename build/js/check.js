@@ -17,12 +17,10 @@ var getMessage = function(a, b) {
     }
     return('Количество красных точек во всех строчках изображения:' + ' ' + sum);
   }
-  if(Array.isArray(a) && Array.isArray(b)) {
+  if (Array.isArray(a) && Array.isArray(b)) {
     var square = 0;
-    var arr = [];
     for(var i = 0; i < a.length; i++) {
-      arr.push(a[i] * b[i]);
-      square += arr[i];
+      square += a[i] * b[i];
     }
     return('Общая площадь артефактов сжатия:' + ' ' + square + ' ' + 'пикселей');
   }
