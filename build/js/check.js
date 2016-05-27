@@ -12,14 +12,14 @@ var getMessage = function(a, b) {
   }
   if (Array.isArray(a)) {
     var sum = 0;
-    for(var i = 0; i < a.length; i++) {
+    for (var i = 0; i < a.length; i++) {
       sum += a[i];
     }
     return('Количество красных точек во всех строчках изображения:' + ' ' + sum);
   }
   if (Array.isArray(a) && Array.isArray(b)) {
     var square = 0;
-    for(var i = 0; i < a.length; i++) {
+    for (var i = 0; i < a.length && i < b.length; i++) {
       square += a[i] * b[i];
     }
     return('Общая площадь артефактов сжатия:' + ' ' + square + ' ' + 'пикселей');
