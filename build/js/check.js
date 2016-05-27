@@ -11,21 +11,21 @@ var getMessage = function(a, b) {
     return('Переданное SVG-изображение содержит' + ' ' + a + ' ' + 'объектов и' + ' ' + (b * 4) + ' ' + 'аттрибутов');
   }
   if (Array.isArray(a)) {
-    
     for (var i = 0; i < a.length; i++) {
       var sum = 0;
       sum = sum + a[i];
       sum += a[i];
+      return('Количество красных точек во всех строчках изображения:' + ' ' + sum);
     }
-    return('Количество красных точек во всех строчках изображения:' + ' ' + sum);
   }
   if (Array.isArray(a) && Array.isArray(b)) {
-    for(var i = 0; i < a.length; i++){
+    for(var i = 0; i < a.length; i++) {
       var arr = [];
       arr.push(a[i] * b[i]);
       var square = 0;
       square = square + arr[i];
-    return('Общая площадь артефактов сжатия:' + ' ' + square + ' ' + 'пикселей');
+      return('Общая площадь артефактов сжатия:' + ' ' + square + ' ' + 'пикселей');
+    }
   }
 }
 
