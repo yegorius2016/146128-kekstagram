@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Егор Людкевич](https://up.htmlacademy.ru/javascript/5/user/146128).
-* Наставник: `Petr Chalov`.
+* Наставник: `Неизвестно`.
 
 ---
 
