@@ -82,15 +82,10 @@
     redraw: function() {
       // Очистка изображения.
       this._ctx.clearRect(0, 0, this._container.width, this._container.height);
-      
-      function draw() {
-        var canvas = document.querySelector('canvas');
-        var ctx = canvas.getContext('2d');
-        ctx.fillRect(0,0,Resizer._image.naturalWidth, Resizer._image.naturalHeight);
-        
-        ctx.globalAlpha = 0.8;
-        }
+      ctx.fillRect(0, 0, Resizer._image.naturalWidth, Resizer._image.naturalHeight);
+      ctx.globalAlpha = 0.8;
       }
+    
     
   
 
