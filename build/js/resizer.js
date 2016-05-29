@@ -83,11 +83,6 @@
       // Очистка изображения.
       this._ctx.fillRect(0, 0, this._container.width, this._container.height);
       this._ctx.globalAlpha = 0.8;
-      }
-    
-    
-  
-
       
       // Параметры линии.
       // NB! Такие параметры сохраняются на время всего процесса отрисовки
