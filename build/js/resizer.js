@@ -81,8 +81,7 @@
      */
     redraw: function() {
       // Очистка изображения.
-      this._ctx.fillRect(0, 0, this._container.width, this._container.height);
-      this._ctx.globalAlpha = 0.8;
+      this._ctx.clearRect(0, 0, this._container.width, this._container.height);
       
       // Параметры линии.
       // NB! Такие параметры сохраняются на время всего процесса отрисовки
