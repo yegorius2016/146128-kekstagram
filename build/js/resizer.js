@@ -20,7 +20,7 @@
       // для удобства работы с координатами.
       this._container.width = this._image.naturalWidth;
       this._container.height = this._image.naturalHeight;
-
+      
       /**
        * Предлагаемый размер кадра в виде коэффициента относительно меньшей
        * стороны изображения.
