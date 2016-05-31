@@ -157,10 +157,8 @@
       this._ctx.translate(this._container.width / 2, this._container.height / 2);
       // Отображение разрешения загружаемого изображения
       // в виде текста:
-      var imageWidth = 1200;
-      var imageHeight = 1200;
-      var resolutionString = imageWidth + ' x ' + imageHeight;
-      var symbolWidth = 5;
+      var resolutionString = this._image.naturalWidth + ' x ' + this._image.naturalHeight;
+      var symbolWidth = 7;
       var symbolsLength = resolutionString.length;
       var offsetX = symbolsLength / 2 * symbolWidth;
       this._ctx.fillStyle = '#FFFFFF';
