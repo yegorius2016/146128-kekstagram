@@ -1,2 +1,5 @@
-require('./resizer');
-require('./upload');
+'use strict';
+
+var resizeFile = require('./resizer');
+var uploadFile = require('./upload');
+
