@@ -26,11 +26,5 @@ var getMessage = function(a, b) {
     return('Общая площадь артефактов сжатия: ' + square + ' пикселей');
   }
 }
-<<<<<<< HEAD
-=======
-
- 
 
 
-
->>>>>>> module1-task1
