@@ -132,28 +132,45 @@
     uploadMessage.classList.add('invisible');
   }
   
-  // Валидация формы
-  var fields = document.querySelectorAll('.upload-resize-controls > input');
-  var xPoint = document.querySelector('#resize-x');
-  var yPoint = document.querySelector('#resize-y');
-  var sizeSide = document.querySelector('#resize-size');
-  var submit = document.querySelector('#resize-fwd');
+  // Валидация формы кадрирования изображения
+  function validateForm() {
+    var x = document.querySelector('#resize-x');
+    var y = document.querySelector('#resize-y');
+    var side = document.querySelector('#resize-size');
 
+    x.min = 0;
+    y.min = 0;
+    side.min = 0;
 
-  // Поля «сверху» и «слева» не могут быть отрицательными.
-  xPoint.value = 0;
-  yPoint.value = 0;
-
-  for (var i = fields.length - 1; i >= 0; i--) {
-    fields[i].oninput = function() {
-      if ((+xPoint.value + +sizeSide.value) > currentResizer._image.naturalWidth
-       || (+yPoint.value + +sizeSide.value) > currentResizer._image.naturalHeight
-       || xPoint.value < 0 || yPoint.value < 0) {
-        submit.setAttribute('disabled');
-      } 
+    x.oninput = function() {
+      setSideConstraint(x, y, side);
+    };
+    y.oninput = function() {
+      setSideConstraint(x, y, side);
+    };
+    side.oninput = function() {
+      setSideConstraint(x, y, side);
+    };
+    var setSideConstraint = function(left, top, s) {
+      if (left.valueAsNumber + side.valueAsNumber > currentResizer._image.naturalWidth || top.valueAsNumber + side.valueAsNumber > currentResizer._image.naturalHeight) {
+        document.querySelector('#resize-fwd').className += ' disabled';
+        left.max = currentResizer._image.naturalWidth - side.valueAsNumber;
+        left.setCustomValidity = 'Максимальное значение ' + left.max;
+        top.max = currentResizer._image.naturalHeight - side.valueAsNumber;
+        top.setCustomValidity = 'Максимальное значение ' + top.max;
+        if (left.valueAsNumber > top.valueAsNumber) {
+          s.max = currentResizer._image.naturalWidth - left.valueAsNumber;
+        } else {
+          s.max = currentResizer._image.naturalHeight - top.valueAsNumber;
+        }
+        s.setCustomValidity = 'Максимальное значение ' + s.max;
+        return true;
+      } else {
+        document.querySelector('#resize-fwd').className = document.querySelector('#resize-fwd').className.replace(/\sdisabled/g, '');
+        return false;
+      }
     };
   }
-  
   /**
    * Обработчик изменения изображения в форме загрузки. Если загруженный
    * файл является изображением, считывается исходник картинки, создается
