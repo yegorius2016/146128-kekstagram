@@ -149,10 +149,8 @@
       if ((+xPoint.value + +sizeSide.value) > currentResizer._image.naturalWidth
        || (+yPoint.value + +sizeSide.value) > currentResizer._image.naturalHeight
        || xPoint.value < 0 || yPoint.value < 0) {
-        submit.setAttribute('disabled', '');
-      } else {
-        submit.removeAttribute('disabled');
-      }
+        submit.setAttribute('disabled');
+      } 
     };
   }
   
