@@ -27,7 +27,6 @@
   var sideTop = document.querySelector('#resize-y');
   var sideSize = document.querySelector('#resize-size');
   var btnSubmit = document.querySelector('.upload-form-controls-fwd');
-  
   /**
    * Регулярное выражение, проверяющее тип загружаемого файла. Составляется
    * из ключей FileType.
@@ -135,7 +134,6 @@
   function hideMessage() {
     uploadMessage.classList.add('invisible');
   }
-  
   /**
    * Обработчик изменения изображения в форме загрузки. Если загруженный
    * файл является изображением, считывается исходник картинки, создается
@@ -167,7 +165,6 @@
         };
 
         fileReader.readAsDataURL(element.files[0]);
-        
       } else {
         // Показ сообщения об ошибке, если загружаемый файл, не является
         // поддерживаемым изображением.
@@ -258,8 +255,6 @@
     // состояние или просто перезаписывать.
     filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
   };
-  
-  
   sideLeft.oninput = function() {
     this.value = parseNumber(this);
     validateFields();
