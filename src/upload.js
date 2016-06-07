@@ -23,6 +23,11 @@
     CUSTOM: 2
   };
 
+  var sideLeft = document.querySelector('#resize-x');
+  var sideTop = document.querySelector('#resize-y');
+  var sideSize = document.querySelector('#resize-size');
+  var btnSubmit = document.querySelector('.upload-form-controls-fwd');
+  
   /**
    * Регулярное выражение, проверяющее тип загружаемого файла. Составляется
    * из ключей FileType.
@@ -40,7 +45,6 @@
    * @type {Resizer}
    */
   var currentResizer;
-
   /**
    * Удаляет текущий объект {@link Resizer}, чтобы создать новый с другим
    * изображением.
@@ -132,45 +136,6 @@
     uploadMessage.classList.add('invisible');
   }
   
-  // Валидация формы кадрирования изображения
-  function validateForm() {
-    var x = document.querySelector('#resize-x');
-    var y = document.querySelector('#resize-y');
-    var side = document.querySelector('#resize-size');
-
-    x.min = 0;
-    y.min = 0;
-    side.min = 0;
-
-    x.oninput = function() {
-      setSideConstraint(x, y, side);
-    };
-    y.oninput = function() {
-      setSideConstraint(x, y, side);
-    };
-    side.oninput = function() {
-      setSideConstraint(x, y, side);
-    };
-    var setSideConstraint = function(left, top, s) {
-      if (left.valueAsNumber + side.valueAsNumber > currentResizer._image.naturalWidth || top.valueAsNumber + side.valueAsNumber > currentResizer._image.naturalHeight) {
-        document.querySelector('#resize-fwd').className += ' disabled';
-        left.max = currentResizer._image.naturalWidth - side.valueAsNumber;
-        left.setCustomValidity = 'Максимальное значение ' + left.max;
-        top.max = currentResizer._image.naturalHeight - side.valueAsNumber;
-        top.setCustomValidity = 'Максимальное значение ' + top.max;
-        if (left.valueAsNumber > top.valueAsNumber) {
-          s.max = currentResizer._image.naturalWidth - left.valueAsNumber;
-        } else {
-          s.max = currentResizer._image.naturalHeight - top.valueAsNumber;
-        }
-        s.setCustomValidity = 'Максимальное значение ' + s.max;
-        return true;
-      } else {
-        document.querySelector('#resize-fwd').className = document.querySelector('#resize-fwd').className.replace(/\sdisabled/g, '');
-        return false;
-      }
-    };
-  }
   /**
    * Обработчик изменения изображения в форме загрузки. Если загруженный
    * файл является изображением, считывается исходник картинки, создается
@@ -202,6 +167,7 @@
         };
 
         fileReader.readAsDataURL(element.files[0]);
+        
       } else {
         // Показ сообщения об ошибке, если загружаемый файл, не является
         // поддерживаемым изображением.
@@ -224,7 +190,6 @@
     resizeForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
-
   /**
    * Обработка отправки формы кадрирования. Если форма валидна, экспортирует
    * кропнутое изображение в форму добавления фильтра и показывает ее.
@@ -240,6 +205,7 @@
       filterForm.classList.remove('invisible');
     }
   };
+
 
   /**
    * Сброс формы фильтра. Показывает форму кадрирования.
@@ -292,6 +258,38 @@
     // состояние или просто перезаписывать.
     filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
   };
+  
+  
+  sideLeft.oninput = function() {
+    this.value = parseNumber(this);
+    validateFields();
+  };
+  sideTop.oninput = function() {
+    this.value = parseNumber(this);
+    validateFields();
+  };
+  sideSize.oninput = function() {
+    this.value = parseNumber(this);
+    validateFields();
+  };
+
+  function validateFields() {
+    var imageWidth = currentResizer._image.naturalWidth;
+    var imageHeight = currentResizer._image.naturalHeight;
+
+    var calculateWidth = parseInt(sideLeft.value, 10) + parseInt(sideSize.value, 10);
+    var calculateHeight = parseInt(sideTop.value, 10) + parseInt(sideSize.value, 10);
+
+    if (calculateWidth <= imageWidth && calculateHeight <= imageHeight) {
+      btnSubmit.disabled = false;
+    } else {
+      btnSubmit.disabled = true;
+    }
+  }
+
+  function parseNumber(field) {
+    return (field.value < 0) ? 0 : field.value;
+  }
 
   cleanupResizer();
   updateBackground();
