@@ -23,10 +23,6 @@
     CUSTOM: 2
   };
 
-  var sideLeft = document.querySelector('#resize-x');
-  var sideTop = document.querySelector('#resize-y');
-  var sideSize = document.querySelector('#resize-size');
-  var btnSubmit = document.querySelector('.upload-form-controls-fwd');
   /**
    * Регулярное выражение, проверяющее тип загружаемого файла. Составляется
    * из ключей FileType.
@@ -133,6 +129,29 @@
 
   function hideMessage() {
     uploadMessage.classList.add('invisible');
+  }
+  // Валидация формы кадрирования изображения
+  var fields = document.querySelectorAll('.upload-resize-controls > input');
+  var xPoint = document.querySelector('#resize-x');
+  var yPoint = document.querySelector('#resize-y');
+  var sizeSide = document.querySelector('#resize-size');
+  var submit = document.querySelector('#resize-fwd');
+
+
+  // Поля «сверху» и «слева» не могут быть отрицательными.
+  xPoint.value = 0;
+  yPoint.value = 0;
+
+  for (var i = fields.length - 1; i >= 0; i--) {
+    fields[i].oninput = function() {
+      if ((+xPoint.value + +sizeSide.value) > currentResizer._image.naturalWidth
+        || (+yPoint.value + +sizeSide.value) > currentResizer._image.naturalHeight
+        || xPoint.value < 0 || yPoint.value < 0) {
+        submit.setAttribute('disabled', '');
+      } else {
+        submit.removeAttribute('disabled');
+      }
+    };
   }
   /**
    * Обработчик изменения изображения в форме загрузки. Если загруженный
@@ -255,36 +274,6 @@
     // состояние или просто перезаписывать.
     filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
   };
-  sideLeft.oninput = function() {
-    this.value = parseNumber(this);
-    validateFields();
-  };
-  sideTop.oninput = function() {
-    this.value = parseNumber(this);
-    validateFields();
-  };
-  sideSize.oninput = function() {
-    this.value = parseNumber(this);
-    validateFields();
-  };
-
-  function validateFields() {
-    var imageWidth = currentResizer._image.naturalWidth;
-    var imageHeight = currentResizer._image.naturalHeight;
-
-    var calculateWidth = parseInt(sideLeft.value, 10) + parseInt(sideSize.value, 10);
-    var calculateHeight = parseInt(sideTop.value, 10) + parseInt(sideSize.value, 10);
-
-    if (calculateWidth <= imageWidth && calculateHeight <= imageHeight) {
-      btnSubmit.disabled = false;
-    } else {
-      btnSubmit.disabled = true;
-    }
-  }
-
-  function parseNumber(field) {
-    return (field.value < 0) ? 0 : field.value;
-  }
 
   cleanupResizer();
   updateBackground();
