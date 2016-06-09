@@ -40,7 +40,6 @@
    * @type {Resizer}
    */
   var currentResizer;
-
   /**
    * Удаляет текущий объект {@link Resizer}, чтобы создать новый с другим
    * изображением.
@@ -131,7 +130,29 @@
   function hideMessage() {
     uploadMessage.classList.add('invisible');
   }
+  // Валидация формы кадрирования изображения
+  var fields = document.querySelectorAll('.upload-resize-controls > input');
+  var xPoint = document.querySelector('#resize-x');
+  var yPoint = document.querySelector('#resize-y');
+  var sizeSide = document.querySelector('#resize-size');
+  var submit = document.querySelector('#resize-fwd');
 
+
+  // Поля «сверху» и «слева» не могут быть отрицательными.
+  xPoint.value = 0;
+  yPoint.value = 0;
+
+  for (var i = fields.length - 1; i >= 0; i--) {
+    fields[i].oninput = function() {
+      if ((+xPoint.value + +sizeSide.value) > currentResizer._image.naturalWidth
+        || (+yPoint.value + +sizeSide.value) > currentResizer._image.naturalHeight
+        || xPoint.value < 0 || yPoint.value < 0) {
+        submit.setAttribute('disabled', '');
+      } else {
+        submit.removeAttribute('disabled');
+      }
+    };
+  }
   /**
    * Обработчик изменения изображения в форме загрузки. Если загруженный
    * файл является изображением, считывается исходник картинки, создается
@@ -185,7 +206,6 @@
     resizeForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
-
   /**
    * Обработка отправки формы кадрирования. Если форма валидна, экспортирует
    * кропнутое изображение в форму добавления фильтра и показывает ее.
@@ -201,6 +221,7 @@
       filterForm.classList.remove('invisible');
     }
   };
+
 
   /**
    * Сброс формы фильтра. Показывает форму кадрирования.
