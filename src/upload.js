@@ -132,10 +132,10 @@
   }
   // Валидация формы кадрирования изображения
   var fields = document.querySelectorAll('.upload-resize-controls > input'),
-      xPoint = document.querySelector('#resize-x'),
-      yPoint = document.querySelector('#resize-y'),
-      sizeSide = document.querySelector('#resize-size'),
-      submit = document.querySelector('#resize-fwd');
+    xPoint = document.querySelector('#resize-x'),
+    yPoint = document.querySelector('#resize-y'),
+    sizeSide = document.querySelector('#resize-size'),
+    submit = document.querySelector('#resize-fwd');
 
 
   // Поля «сверху» и «слева» не могут быть отрицательными.
