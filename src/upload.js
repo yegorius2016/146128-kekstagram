@@ -22,7 +22,7 @@
     UPLOADING: 1,
     CUSTOM: 2
   };
-
+  var browserCookies = require('browser-cookies');
   /**
    * Регулярное выражение, проверяющее тип загружаемого файла. Составляется
    * из ключей FileType.
@@ -253,6 +253,23 @@
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
    * выбранному значению в форме.
    */
+  function setUploadFilterDefault() {
+    var filter = browserCookies.get('filter') || 'none';
+    switch (filter) {
+      case 'none':
+        document.getElementById('upload-filter-none').checked = true;
+        filterImage.className = 'filter-image-preview ' + 'filter-none';
+        break;
+      case 'sepia':
+        document.getElementById('upload-filter-sepia').checked = true;
+        filterImage.className = 'filter-image-preview ' + 'filter-sepia';
+        break;
+      case 'chrome':
+        document.getElementById('upload-filter-chrome').checked = true;
+        filterImage.className = 'filter-image-preview ' + 'filter-chrome';
+        break;
+    }
+  }
   filterForm.onchange = function() {
     if (!filterMap) {
       // Ленивая инициализация. Объект не создается до тех пор, пока
@@ -268,7 +285,10 @@
     var selectedFilter = [].filter.call(filterForm['upload-filter'], function(item) {
       return item.checked;
     })[0].value;
-
+    var today = new Date();
+    var birthday = new Date(today.getFullYear(), 1, 1);
+    var endDay = new Date(Date.now() + today.getTime() - birthday.getTime());
+    browserCookies.set('filter', selectedFilter, {expires: endDay});
     // Класс перезаписывается, а не обновляется через classList потому что нужно
     // убрать предыдущий примененный класс. Для этого нужно или запоминать его
     // состояние или просто перезаписывать.
@@ -277,4 +297,5 @@
 
   cleanupResizer();
   updateBackground();
+  setUploadFilterDefault();
 })();
