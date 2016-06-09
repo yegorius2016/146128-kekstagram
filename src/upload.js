@@ -131,11 +131,11 @@
     uploadMessage.classList.add('invisible');
   }
   // Валидация формы кадрирования изображения
-  var fields = document.querySelectorAll('.upload-resize-controls > input');
-  var xPoint = document.querySelector('#resize-x');
-  var yPoint = document.querySelector('#resize-y');
-  var sizeSide = document.querySelector('#resize-size');
-  var submit = document.querySelector('#resize-fwd');
+  var fields = document.querySelectorAll('.upload-resize-controls > input'),
+      xPoint = document.querySelector('#resize-x'),
+      yPoint = document.querySelector('#resize-y'),
+      sizeSide = document.querySelector('#resize-size'),
+      submit = document.querySelector('#resize-fwd');
 
 
   // Поля «сверху» и «слева» не могут быть отрицательными.
