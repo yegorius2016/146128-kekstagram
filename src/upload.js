@@ -286,8 +286,11 @@
       return item.checked;
     })[0].value;
     var today = new Date();
-    var birthday = new Date(today.getFullYear(), 1, 1);
-    var endDay = new Date(Date.now() + today.getTime() - birthday.getTime());
+    var birthday = new Date(today.getFullYear(), 2, 2);
+    if ((today - birthday) < 0) {
+      birthday.setFullYear(today.getFullYear() - 1);
+    }
+    var endDay = new Date((Math.floor(Date.now() / 1000 * 60 * 60 * 24) - birthday));
     browserCookies.set('filter', selectedFilter, {expires: endDay});
     // Класс перезаписывается, а не обновляется через classList потому что нужно
     // убрать предыдущий примененный класс. Для этого нужно или запоминать его
