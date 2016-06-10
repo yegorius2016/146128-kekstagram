@@ -258,15 +258,15 @@
     switch (filter) {
       case 'none':
         document.getElementById('upload-filter-none').checked = true;
-        filterImage.className = 'filter-image-preview ' + 'filter-none';
+        filterImage.className.add('filter-none');
         break;
       case 'sepia':
         document.getElementById('upload-filter-sepia').checked = true;
-        filterImage.className = 'filter-image-preview ' + 'filter-sepia';
+        filterImage.className.add('filter-sepia');
         break;
       case 'chrome':
         document.getElementById('upload-filter-chrome').checked = true;
-        filterImage.className = 'filter-image-preview ' + 'filter-chrome';
+        filterImage.className.add('filter-chrome');
         break;
     }
   }
