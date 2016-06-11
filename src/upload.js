@@ -22,7 +22,6 @@
     UPLOADING: 1,
     CUSTOM: 2
   };
-
   /**
    * Регулярное выражение, проверяющее тип загружаемого файла. Составляется
    * из ключей FileType.
@@ -131,11 +130,11 @@
     uploadMessage.classList.add('invisible');
   }
   // Валидация формы кадрирования изображения
-  var fields = document.querySelectorAll('.upload-resize-controls > input');
-  var xPoint = document.querySelector('#resize-x');
-  var yPoint = document.querySelector('#resize-y');
-  var sizeSide = document.querySelector('#resize-size');
-  var submit = document.querySelector('#resize-fwd');
+  var fields = document.querySelectorAll('.upload-resize-controls > input'),
+    xPoint = document.querySelector('#resize-x'),
+    yPoint = document.querySelector('#resize-y'),
+    sizeSide = document.querySelector('#resize-size'),
+    submit = document.querySelector('#resize-fwd');
 
 
   // Поля «сверху» и «слева» не могут быть отрицательными.
@@ -253,6 +252,24 @@
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
    * выбранному значению в форме.
    */
+  var browserCookies = require('browser-cookies');
+  function setUploadFilterDefault() {
+    var filter = browserCookies.get('filter') || 'none';
+    switch (filter) {
+      case 'none':
+        document.getElementById('upload-filter-none').checked = true;
+        filterImage.classList.add('filter-none');
+        break;
+      case 'sepia':
+        document.getElementById('upload-filter-sepia').checked = true;
+        filterImage.classList.add('filter-sepia');
+        break;
+      case 'chrome':
+        document.getElementById('upload-filter-chrome').checked = true;
+        filterImage.classList.add('filter-chrome');
+        break;
+    }
+  }
   filterForm.onchange = function() {
     if (!filterMap) {
       // Ленивая инициализация. Объект не создается до тех пор, пока
@@ -268,7 +285,13 @@
     var selectedFilter = [].filter.call(filterForm['upload-filter'], function(item) {
       return item.checked;
     })[0].value;
-
+    var today = new Date();
+    var birthday = new Date(today.getFullYear(), 2, 2);
+    if ((today - birthday) < 0) {
+      birthday.setFullYear(today.getFullYear() - 1);
+    }
+    var endDay = Math.floor((today - birthday) / 1000 / 60 / 60 / 24);
+    browserCookies.set('filter', selectedFilter, {expires: endDay});
     // Класс перезаписывается, а не обновляется через classList потому что нужно
     // убрать предыдущий примененный класс. Для этого нужно или запоминать его
     // состояние или просто перезаписывать.
@@ -277,4 +300,5 @@
 
   cleanupResizer();
   updateBackground();
+  setUploadFilterDefault();
 })();
