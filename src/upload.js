@@ -287,7 +287,7 @@
     })[0].value;
     var today = new Date();
     var birthday = new Date(today.getFullYear(), 2, 2);
-    if ((birthday - today) < 0) {
+    if ((today - birthday) < 0) {
       birthday.setFullYear(today.getFullYear() - 1);
     }
     var endDay = Math.floor((today - birthday) / 1000 / 60 / 60 / 24);
