@@ -22,7 +22,6 @@
     UPLOADING: 1,
     CUSTOM: 2
   };
-  var browserCookies = require('browser-cookies');
   /**
    * Регулярное выражение, проверяющее тип загружаемого файла. Составляется
    * из ключей FileType.
@@ -253,20 +252,21 @@
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
    * выбранному значению в форме.
    */
+  var browserCookies = require('browser-cookies');
   function setUploadFilterDefault() {
     var filter = browserCookies.get('filter') || 'none';
     switch (filter) {
       case 'none':
         document.getElementById('upload-filter-none').checked = true;
-        filterImage.className.add('filter-none');
+        filterImage.classList.add('filter-none');
         break;
       case 'sepia':
         document.getElementById('upload-filter-sepia').checked = true;
-        filterImage.className.add('filter-sepia');
+        filterImage.classList.add('filter-sepia');
         break;
       case 'chrome':
         document.getElementById('upload-filter-chrome').checked = true;
-        filterImage.className.add('filter-chrome');
+        filterImage.classList.add('filter-chrome');
         break;
     }
   }
@@ -287,7 +287,7 @@
     })[0].value;
     var today = new Date();
     var birthday = new Date(today.getFullYear(), 2, 2);
-    if ((birthday - today) < 0) {
+    if ((today - birthday) < 0) {
       birthday.setFullYear(today.getFullYear() - 1);
     }
     var endDay = Math.floor((today - birthday) / 1000 / 60 / 60 / 24);
