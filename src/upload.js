@@ -290,7 +290,7 @@
     if ((today - birthday) < 0) {
       birthday.setFullYear(today.getFullYear() - 1);
     }
-    var endDay = Math.floor((today - birthday) / 1000 / 60 / 60 / 24);
+    var endDay = Math.ceil((today - birthday) / 1000 / 60 / 60 / 24);
     browserCookies.set('filter', selectedFilter, {expires: endDay});
     // Класс перезаписывается, а не обновляется через classList потому что нужно
     // убрать предыдущий примененный класс. Для этого нужно или запоминать его
