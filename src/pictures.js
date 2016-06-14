@@ -31,7 +31,7 @@ var getGallery = function(source, callback) {
   };
 
   xhr.onloadend = function() {
-    if (xhr.status != 200) {
+    if (xhr.status !== 200) {
       setClassOnFailure();
     }
   };
