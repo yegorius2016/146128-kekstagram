@@ -348,7 +348,6 @@ input[type=radio]:checked + .upload-filter-label {
   text-align: left;
 }
 
-.picture-none:after,
 .pictures-loading:after,
 .pictures-failure:after {
   position: absolute;
@@ -367,10 +366,6 @@ input[type=radio]:checked + .upload-filter-label {
 
   background: rgba(0, 0, 0, 0.7);
   border-radius: 10px;
-}
-
-.pictures-none:after {
-  content: "nothing :C"
 }
 
 .pictures-loading:after {
