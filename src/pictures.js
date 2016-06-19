@@ -1,6 +1,6 @@
 'use strict';
-var filtersToHide = document.querySelector('.filters');
-filtersToHide.classList.add('hidden');
+var filters = document.querySelector('.filters');
+filters.classList.add('hidden');
 
 var templateElement = document.getElementById('picture-template');
 var photosContainer = document.querySelector('.pictures');
@@ -9,7 +9,6 @@ var IMAGE_WIDTH = 182;
 var IMAGE_HEIGHT = 182;
 var XHR_TIMEOUT = 10000;
 var FOUR_DAYS = 4 * 24 * 60 * 60 * 1000;
-var DEFAULT_FILTER = 'popular';
 var pageNumber = 0;
 var PAGE_SIZE = 12;
 var responseData = [];
@@ -43,7 +42,7 @@ var getGallery = function(source, callback) {
   xhr.onload = function(evt) {
     responseData = JSON.parse(evt.target.response);
     callback(responseData);
-    filtersToHide.classList.remove('hidden');
+    filters.classList.remove('hidden');
     photosContainer.classList.remove('pictures-loading');
   };
 
@@ -157,9 +156,21 @@ var setFiltrationEnabled = function() {
   });
 };
 
+var THROTTER_DELAY = 100;
+var setScrollEnabled = function() {
+  var lastCall = Date.now();
+  window.addEventListener('scroll', function() {
+    if (Date.now() - lastCall >= THROTTER_DELAY) {
+      renderNextPages();
+      lastCall = Date.now();
+    }
+  });
+};
+
 getGallery('//o0.github.io/assets/json/pictures.json', function(loadedPhotos) {
   photos = loadedPhotos;
-  renderGallery(photos);
+  renderGallery();
   setFiltrationEnabled(true);
   setFilterEnabled('popular');
+  setScrollEnabled();
 });
