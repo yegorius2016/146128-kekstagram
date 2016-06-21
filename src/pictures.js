@@ -25,26 +25,26 @@ var getGallery = function(source, callback) {
   };
 
   xhr.timeout = XHR_TIMEOUT;
-  xhr.addEventListener('timeout', function() {
+  xhr.ontimeout = function() {
     setClassOnFailure();
-  });
+  };
 
-  xhr.addEventListener('error', function() {
+  xhr.onerror = function() {
     setClassOnFailure();
-  });
+  };
 
-  xhr.addEventListener('loadend', function() {
+  xhr.onloadend = function() {
     if (xhr.status !== 200) {
       setClassOnFailure();
     }
-  });
+  };
 
-  xhr.addEventListener('load', function(evt) {
+  xhr.onload = function(evt) {
     responseData = JSON.parse(evt.target.response);
     callback(responseData);
     filters.classList.remove('hidden');
     photosContainer.classList.remove('pictures-loading');
-  });
+  };
 
   xhr.open('GET', source);
   xhr.send();
@@ -63,15 +63,15 @@ var setPhotoElement = function(data) {
   element.querySelector('.picture-likes').textContent = data.likes;
 
   var preview = new Image();
-  preview.addEventListener('load', function() {
+  preview.onload = function() {
     imgElement.src = preview.src;
     imgElement.width = IMAGE_WIDTH;
     imgElement.height = IMAGE_HEIGHT;
-  });
+  };
 
-  preview.addEventListener('error', function() {
+  preview.onerror = function() {
     element.classList.add('picture-load-failure');
-  });
+  };
 
   preview.src = data.url;
   photosContainer.appendChild(element);
