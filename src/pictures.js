@@ -156,11 +156,11 @@ var setFiltrationEnabled = function() {
   });
 };
 
-var THROTTER_DELAY = 100;
+var THROTTLE_DELAY = 100;
 var setScrollEnabled = function() {
   var lastCall = Date.now();
   window.addEventListener('scroll', function() {
-    if (Date.now() - lastCall >= THROTTER_DELAY) {
+    if (Date.now() - lastCall >= THROTTLE_DELAY) {
       renderNextPages();
       lastCall = Date.now();
     }
