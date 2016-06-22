@@ -139,19 +139,17 @@
     var xPointValue = parseInt(xPoint.value, 10) || 0;
     var yPointValue = parseInt(yPoint.value, 10) || 0;
     var sizeSideValue = parseInt(sizeSide.value, 10) || 0;
-  if (feedback) {
+    if (feedback) {
     feedback(xPointValue, yPointValue, sizeSideValue);
-    }
-  };
- 
- window.addEventListener('resizerchange', function() {
+  }
+ };
+  window.addEventListener('resizerchange', function() {
    var cropValues = currentResizer.getConstraint();
    sizeSide.value = Math.floor(cropValues.side);
    xPoint.value = Math.floor(cropValues.x);
    yPoint.value = Math.floor(cropValues.y);
    validateFields();
-   });
- 
+ });
   var formResizerFeedback = function(x, y, side) {
     currentResizer.setConstraint(x, y, side);
     };
