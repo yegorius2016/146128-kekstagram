@@ -135,21 +135,20 @@
     yPoint = document.querySelector('#resize-y'),
     sizeSide = document.querySelector('#resize-size'),
     submit = document.querySelector('#resize-fwd');
-  
   var validateFields = function(feedback) {
-      var xResizeValue = parseInt(xResize.value, 10) || 0;
-      var yResizeValue = parseInt(yResize.value, 10) || 0;
-      var sideResizeValue = parseInt(sideResize.value, 10) || 0;
+    var xPointValue = parseInt(xPoint.value, 10) || 0;
+    var yPointValue = parseInt(yPoint.value, 10) || 0;
+    var sizeSideValue = parseInt(sizeSide.value, 10) || 0;
   if (feedback) {
-    feedback(xResizeValue, yResizeValue, sideResizeValue);
+    feedback(xPointValue, yPointValue, sizeSideValue);
     }
   };
  
  window.addEventListener('resizerchange', function() {
    var cropValues = currentResizer.getConstraint();
-   sideResize.value = Math.floor(cropValues.side);
-   xResize.value = Math.floor(cropValues.x);
-   yResize.value = Math.floor(cropValues.y);
+   sizeSide.value = Math.floor(cropValues.side);
+   xPoint.value = Math.floor(cropValues.x);
+   yPoint.value = Math.floor(cropValues.y);
    validateFields();
    });
  
