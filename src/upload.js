@@ -135,7 +135,27 @@
     yPoint = document.querySelector('#resize-y'),
     sizeSide = document.querySelector('#resize-size'),
     submit = document.querySelector('#resize-fwd');
-
+  
+  var validateFields = function(feedback) {
+      var xResizeValue = parseInt(xResize.value, 10) || 0;
+      var yResizeValue = parseInt(yResize.value, 10) || 0;
+      var sideResizeValue = parseInt(sideResize.value, 10) || 0;
+  if (feedback) {
+    feedback(xResizeValue, yResizeValue, sideResizeValue);
+    }
+  };
+ 
+ window.addEventListener('resizerchange', function() {
+   var cropValues = currentResizer.getConstraint();
+   sideResize.value = Math.floor(cropValues.side);
+   xResize.value = Math.floor(cropValues.x);
+   yResize.value = Math.floor(cropValues.y);
+   validateFields();
+   });
+ 
+  var formResizerFeedback = function(x, y, side) {
+    currentResizer.setConstraint(x, y, side);
+    };
 
   // Поля «сверху» и «слева» не могут быть отрицательными.
   xPoint.value = 0;
@@ -150,6 +170,7 @@
       } else {
         submit.removeAttribute('disabled');
       }
+    validateFields(formResizerFeedback);
     });
   }
   /**
