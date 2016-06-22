@@ -140,19 +140,19 @@
     var yPointValue = parseInt(yPoint.value, 10) || 0;
     var sizeSideValue = parseInt(sizeSide.value, 10) || 0;
     if (feedback) {
-    feedback(xPointValue, yPointValue, sizeSideValue);
-  }
- };
+      feedback(xPointValue, yPointValue, sizeSideValue);
+    }
+  };
   window.addEventListener('resizerchange', function() {
-   var cropValues = currentResizer.getConstraint();
-   sizeSide.value = Math.floor(cropValues.side);
-   xPoint.value = Math.floor(cropValues.x);
-   yPoint.value = Math.floor(cropValues.y);
-   validateFields();
- });
+    var cropValues = currentResizer.getConstraint();
+    sizeSide.value = Math.floor(cropValues.side);
+    xPoint.value = Math.floor(cropValues.x);
+    yPoint.value = Math.floor(cropValues.y);
+    validateFields();
+  });
   var formResizerFeedback = function(x, y, side) {
     currentResizer.setConstraint(x, y, side);
-    };
+  };
 
   // Поля «сверху» и «слева» не могут быть отрицательными.
   xPoint.value = 0;
@@ -167,7 +167,7 @@
       } else {
         submit.removeAttribute('disabled');
       }
-    validateFields(formResizerFeedback);
+      validateFields(formResizerFeedback);
     });
   }
   /**
