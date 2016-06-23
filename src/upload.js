@@ -135,12 +135,21 @@
     yPoint = document.querySelector('#resize-y'),
     sizeSide = document.querySelector('#resize-size'),
     submit = document.querySelector('#resize-fwd');
-  var validateFields = function(feedback) {
+  var resizeFields = function(feedback) {
     var xPointValue = parseInt(xPoint.value, 10) || 0;
     var yPointValue = parseInt(yPoint.value, 10) || 0;
     var sizeSideValue = parseInt(sizeSide.value, 10) || 0;
     if (feedback) {
       feedback(xPointValue, yPointValue, sizeSideValue);
+    }
+  };
+  var validateFields = function() {
+    if ((+xPoint.value + +sizeSide.value) > currentResizer._image.naturalWidth
+      || (+yPoint.value + +sizeSide.value) > currentResizer._image.naturalHeight
+      || xPoint.value < 0 || yPoint.value < 0) {
+      submit.setAttribute('disabled', '');
+    } else {
+      submit.removeAttribute('disabled');
     }
   };
   window.addEventListener('resizerchange', function() {
@@ -160,14 +169,8 @@
 
   for (var i = fields.length - 1; i >= 0; i--) {
     fields[i].addEventListener('input', function() {
-      if ((+xPoint.value + +sizeSide.value) > currentResizer._image.naturalWidth
-        || (+yPoint.value + +sizeSide.value) > currentResizer._image.naturalHeight
-        || xPoint.value < 0 || yPoint.value < 0) {
-        submit.setAttribute('disabled', '');
-      } else {
-        submit.removeAttribute('disabled');
-      }
-      validateFields(formResizerFeedback);
+      validateFields();
+      resizeFields(formResizerFeedback);
     });
   }
   /**
