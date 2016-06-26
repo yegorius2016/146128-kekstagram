@@ -27,4 +27,4 @@ var Photo = function(data) {
   return element;
 };
 
-  module.exports = Photo;
+module.exports = Photo;
