@@ -14,7 +14,7 @@ var photos = [];
 
 var getGallery = require('./get_gallery');
 var Photo = require('./photo');
-var utils = require('./utils.js');
+var utils = require('./utils');
 
 var renderGallery = function() {
   var from = pageNumber * PAGE_SIZE;
